@@ -1,0 +1,17 @@
+package com.project.demo.dto;
+
+import java.time.LocalDate;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor  
+@AllArgsConstructor 
+public class Studentdto {
+	private String studentName;	
+	private Long regNo;
+	private String className;
+	private LocalDate joinDate;
+	private String address;
+}
