@@ -1,0 +1,17 @@
+package com.project.demo.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.Studentdto;
+
+import com.project.demo.entity.Student;
+
+@Service
+public interface StudentService {
+	
+	Student saveStudentname(Studentdto dtoBooks);
+	List<Student> getAllStudent();
+	Student getStudentByid(Long studentid);
+}
