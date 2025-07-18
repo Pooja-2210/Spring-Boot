@@ -1,0 +1,54 @@
+package com.project.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.CustomerVODTO;
+import com.project.demo.dto.OrderDTO;
+import com.project.demo.entity.CustomerVO;
+import com.project.demo.entity.OrderVO;
+import com.project.demo.repository.CustomerRepo;
+import com.project.demo.repository.OrderRepo;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+	@Autowired
+	CustomerRepo customerRepo;
+	@Autowired
+	OrderRepo orderRepo;
+
+	@Override
+	public CustomerVO savecustomer(CustomerVODTO dto) {
+	    CustomerVO vo = new CustomerVO();
+	    vo.setName(dto.getCustomername());
+	    vo.setEmail(dto.getEmail());
+
+	    List<OrderVO> orderVOs = new ArrayList<>();
+
+	    if (dto.getOrderDTOs() != null && !dto.getOrderDTOs().isEmpty()) {
+	        for (OrderDTO orderDTO : dto.getOrderDTOs()) {
+	            OrderVO orderVO = new OrderVO();
+	            orderVO.setName(orderDTO.getName());
+	            orderVO.setAmount(orderDTO.getAmount());
+	            orderVO.setCustomerVO(vo); // Set back reference
+	            orderVOs.add(orderVO);
+	        }
+	    }
+
+	    vo.setOrderVO(orderVOs); // Set order list in customer
+
+	    return customerRepo.save(vo); // Save customer, cascade should save orders
+	}
+
+
+	@Override
+	public CustomerVO getCustomer(Long id) {
+		
+		return customerRepo.findById(id).get();
+		
+	}
+
+}
