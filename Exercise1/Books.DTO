@@ -1,0 +1,19 @@
+package com.project.demo.dto;
+import com.project.demo.entity.Books;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class BookDTO {
+	private String booksName;
+	private String booksCode;
+	private boolean available;
+
+} 
