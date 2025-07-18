@@ -1,0 +1,14 @@
+package com.project.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.project.demo.entity.StudentVO;
+
+public interface StudentVOrepo extends JpaRepository<StudentVO , Long> {
+	@Query(nativeQuery = true,value="SELECT * FROM sakila.studentsmark WHERE total>?1")
+	List<StudentVO> findmarkBytotal(Long total);
+
+}
