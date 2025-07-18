@@ -1,0 +1,44 @@
+package com.project.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.Studentdto;
+import com.project.demo.entity.Student;
+import com.project.demo.repository.Studentrepo;
+
+@Service
+public class Studentimpl implements StudentService {
+	
+	@Autowired
+	Studentrepo studentRepo;
+
+	@Override
+	public Student saveStudentname(Studentdto dtostudent) {
+
+		Student abc = new Student();
+		abc.setAddress(dtostudent.getAddress());
+		abc.setClassName(dtostudent.getClassName());
+		abc.setRegNo(dtostudent.getRegNo());
+		abc.setJoinDate(dtostudent.getJoinDate());
+		abc.setRegNo(dtostudent.getRegNo());
+		abc.setStudentName(dtostudent.getStudentName());
+		studentRepo.save(abc);
+		return abc;
+	}
+
+	@Override
+	public List<Student> getAllStudent() {
+		
+		return studentRepo.findAll();
+	}
+
+	@Override
+	public Student getStudentByid(Long studentid) {
+		// TODO Auto-generated method stub
+		return studentRepo.findById(studentid).get();
+	}
+
+}
