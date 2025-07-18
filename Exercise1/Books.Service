@@ -1,0 +1,22 @@
+package com.project.demo.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.demo.dto.BookDTO;
+import com.project.demo.entity.Books;
+
+@Service
+public interface BooksService {
+
+	
+	Books saveBooksname(BookDTO dtoBooks);
+	
+	  
+	  public Books updateBooks(@RequestParam Long id,@RequestBody BookDTO BookDTO);
+	  public void deleteByBooks(Long id);
+	  
+	
+	
+}
