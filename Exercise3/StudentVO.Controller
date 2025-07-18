@@ -1,0 +1,37 @@
+package com.project.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.demo.dto.StudentVOdto;
+import com.project.demo.entity.StudentVO;
+import com.project.demo.service.StudentVOService;
+
+@RestController
+@RequestMapping("/stdController")
+public class StudentVOcontroller {
+	@Autowired
+	StudentVOService studentVOService;
+
+	@PostMapping("/createStudentVO")
+	public StudentVO createServiceDetails(@RequestBody StudentVOdto StudentVOdto) {
+		return studentVOService.saveStudentVOname(StudentVOdto);
+
+	}
+   @PostMapping("/saveMultipleStudentVOname")
+   public List<StudentVO>saveMultipleStudentVOname(@RequestBody List<StudentVOdto> studentVOdto) {
+	   return studentVOService.saveMultipleStudentVOname(studentVOdto);
+   }
+   @GetMapping("/fetchMarkBytotal")
+   public List<StudentVO> saveBytotal(@RequestParam Long total){
+	   return studentVOService.fetchmarkBytotal(total);
+   }
+   
+}
