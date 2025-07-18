@@ -1,0 +1,45 @@
+package com.project.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.BookDTO;
+import com.project.demo.entity.Books;
+import com.project.demo.repository.Booksrepo;
+
+@Service 
+public class Booksimpl implements BooksService {
+
+@Autowired
+Booksrepo booksRepo;
+
+	@Override
+	public Books saveBooksname(BookDTO dtoBooks) {
+		Books abc= new Books();
+		abc.setAvailable(dtoBooks.isAvailable());
+		abc.setBooksCode(dtoBooks.getBooksCode());
+		abc.setBooksName(dtoBooks.getBooksName());
+		booksRepo.save(abc);
+		return abc;
+		
+	}
+
+	@Override
+	public Books updateBooks(Long id, BookDTO BookDTO) {
+		
+		Books books=booksRepo.findById(id).get();
+		books.setBooksName(BookDTO.getBooksName());
+		books.setBooksCode(BookDTO.getBooksCode());
+		
+		return booksRepo.save(books);
+	}
+
+	@Override
+	public void deleteByBooks(Long id) {
+		booksRepo.deleteById(id);
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+} 
