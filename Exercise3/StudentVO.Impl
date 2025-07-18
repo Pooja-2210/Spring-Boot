@@ -1,0 +1,75 @@
+package com.project.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.StudentVOdto;
+import com.project.demo.entity.StudentVO;
+import com.project.demo.repository.StudentVOrepo;
+
+@Service
+public class StudentVOimpl implements StudentVOService {
+	@Autowired
+	StudentVOrepo studVOrepo;
+
+	@Override
+	public StudentVO saveStudentVOname(StudentVOdto StudentVOdto) {
+
+		StudentVO studentVO = new StudentVO();
+
+		studentVO.setStudentName(StudentVOdto.getStudentName());
+		studentVO.setTamil(StudentVOdto.getTamil());
+		studentVO.setEnglish(StudentVOdto.getEnglish());
+		studentVO.setMaths(StudentVOdto.getMaths());
+		studentVO.setScience(StudentVOdto.getScience());
+		studentVO.setSocialscience(StudentVOdto.getSocialscience());
+		long totalMarks = StudentVOdto.getTamil() + StudentVOdto.getEnglish() + StudentVOdto.getMaths()
+				+ StudentVOdto.getScience() + StudentVOdto.getSocialscience();
+		studentVO.setTotal(totalMarks);
+		if (StudentVOdto.getTamil()>= 35 && StudentVOdto.getEnglish()>= 35 && StudentVOdto.getMaths()>= 35 && StudentVOdto.getScience()>= 35 && StudentVOdto.getSocialscience()>= 35) {
+			studentVO.setResult("pass");
+		}else {
+			studentVO.setResult("fail");
+		}
+
+		return studVOrepo.save(studentVO);
+	}
+
+	@Override
+	    public List<StudentVO> saveMultipleStudentVOname(List<StudentVOdto> studentVOdtoa) {
+		for(StudentVOdto studentVOdto : studentVOdtoa) {
+		StudentVO studentVO = new StudentVO();
+
+		studentVO.setStudentName(studentVOdto.getStudentName());
+		studentVO.setTamil(studentVOdto.getTamil());
+		studentVO.setEnglish(studentVOdto.getEnglish());
+		studentVO.setMaths(studentVOdto.getMaths());
+		studentVO.setScience(studentVOdto.getScience());
+		studentVO.setSocialscience(studentVOdto.getSocialscience());
+		long totalMarks = studentVOdto.getTamil() + studentVOdto.getEnglish() + studentVOdto.getMaths()
+				+ studentVOdto.getScience() + studentVOdto.getSocialscience();
+		studentVO.setTotal(totalMarks);
+		if (studentVOdto.getTamil()>= 35 && studentVOdto.getEnglish()>= 35 && studentVOdto.getMaths()>= 35 && studentVOdto.getScience()>= 35 && studentVOdto.getSocialscience()>= 35) {
+			studentVO.setResult("pass");
+		}else {
+			studentVO.setResult("fail");
+		}
+
+	  studVOrepo.save(studentVO);
+	}
+
+		return studVOrepo.findAll();
+	}
+
+	@Override
+	public List<StudentVO> fetchmarkBytotal(Long total) {
+		// TODO Auto-generated method stub
+		return studVOrepo.findmarkBytotal(total);
+	}
+
+	
+      
+	
+}
