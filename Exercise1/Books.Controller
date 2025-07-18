@@ -1,0 +1,35 @@
+package com.project.demo.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.demo.dto.BookDTO;
+import com.project.demo.entity.Books;
+import com.project.demo.service.BooksService;
+
+@RestController
+public class Bookscontroller {
+	@Autowired
+	BooksService booksService;
+
+	@PostMapping("/createBooks")
+	public Books createBooksDetails(@RequestBody BookDTO booksDTO) {
+		return booksService.saveBooksname(booksDTO);
+	}
+
+@PutMapping("/updateBooks")
+	public Books updateBooks(@RequestParam Long id,@RequestBody BookDTO BooksDTO) {
+		return booksService.updateBooks(id,BooksDTO);
+			
+	}
+@DeleteMapping("/deleteBooks")
+public ResponseEntity<String> deleteByBooks(@RequestParam Long id) {
+	booksService.deleteByBooks(id);
+    return ResponseEntity.ok("Books deleted successfully with id: " + id);
+}
+}
