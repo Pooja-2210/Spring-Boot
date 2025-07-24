@@ -1,0 +1,43 @@
+package com.project.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.Officedto;
+import com.project.demo.entity.Office;
+import com.project.demo.repository.Officerepo;
+
+
+@Service
+
+public class Officeimpl implements OfficeService {
+	@Autowired
+	Officerepo officeRepo;
+
+	@Override
+	public Office saveOfficename(Officedto officedto) {
+		Office abc= new Office();
+		abc.setOfficeName(officedto.getOfficeName());
+		abc.setLocation(officedto.getLocation());
+		abc.setNumber(officedto.getNumber());
+		abc.setManager(officedto.getManager());
+		officeRepo.save(abc);
+		return abc;
+	}
+
+	@Override
+	public List<Office> getAllOffice() {
+		
+		return officeRepo.findAll();
+	}
+
+	@Override
+	public Office getOfficeById(Long officeid) {
+		
+		return officeRepo.findById(officeid).get();
+	}
+	
+
+}
