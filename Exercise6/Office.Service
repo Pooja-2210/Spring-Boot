@@ -1,0 +1,18 @@
+package com.project.demo.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.project.demo.dto.Officedto;
+import com.project.demo.entity.Office;
+
+@Service
+public interface OfficeService {
+	Office saveOfficename(Officedto officedto);
+	List <Office> getAllOffice();
+	Office getOfficeById(Long officeid);
+	
+	
+
+}
